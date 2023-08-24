@@ -1,6 +1,6 @@
 population<-data.frame(x=runif(1000,0,100),
                        y=runif(1000,0,100))
-population %>% dim()
+# population %>% dim()
 
 get_labels<-function(p){
     nb<-round(p*1000,0)
@@ -107,7 +107,7 @@ get_ci_start<-function(p){
     ggplot()+
         geom_hline(yintercept=p,
                    col='green4',
-                   size=1.25,
+                   linewidth=1.25,
                    alpha=.75)+
         coord_cartesian(xlim=c(0,10),ylim=c(0,1))+
         geom_hline(yintercept=0)+geom_vline(xintercept=0)+
@@ -119,7 +119,7 @@ get_conf_int<-function(pop_details, sample_num, p_val,showCI){
         get_ci_start(p_val)
     } else {
         if (showCI==T){
-            ggplot()+geom_hline(yintercept=p_val,col='green4',size=1.25,
+            ggplot()+geom_hline(yintercept=p_val,col='green4',linewidth=1.25,
                                 alpha=.75)+
                 geom_hline(yintercept=0)+geom_vline(xintercept=0)+
                 geom_errorbar(data=pop_details[1:sample_num,],
@@ -127,25 +127,25 @@ get_conf_int<-function(pop_details, sample_num, p_val,showCI){
                                   ymin = ymins,
                                   ymax = ymaxes,
                                   col=flag),
-                              size=1,
+                              linewidth=1,
                               width=.1+.2*(sample_num/(sample_num+10)))+
                 geom_point(data=pop_details[1:sample_num,],
                            aes(x = 1:sample_num,
                                y = sample_props,
                                col=flag))+
-                scale_color_manual("",values=c("blue","red"),guide=F)+
+                scale_color_manual("",values=c("blue","red"),guide="none")+
                 coord_cartesian(xlim=c(0,max(10,sample_num+3)),
                                 ylim=c(0,1))+
                 labs(x="Sample ID",y="Sample Percentages")
         } else {
-            ggplot()+geom_hline(yintercept=p_val,col='green4',size=1.25,
+            ggplot()+geom_hline(yintercept=p_val,col='green4',linewidth=1.25,
                                 alpha=.75)+
                 geom_hline(yintercept=0)+geom_vline(xintercept=0)+
                 geom_point(data=pop_details[1:sample_num,],
                            aes(x = 1:sample_num,
                                y = sample_props,
                                col=flag))+
-                scale_color_manual("",values=c("blue","red"),guide=F)+
+                scale_color_manual("",values=c("blue","red"),guide="none")+
                 coord_cartesian(xlim=c(0,max(10,sample_num+3)),
                                 ylim=c(0,1))+
                 labs(x="Sample ID",y="Sample Percentages") 
