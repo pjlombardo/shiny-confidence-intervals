@@ -1,3 +1,4 @@
+
 population<-data.frame(x=runif(1000,0,100),
                        y=runif(1000,0,100))
 # population %>% dim()
